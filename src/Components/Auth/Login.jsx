@@ -23,7 +23,7 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(schema),
   })
@@ -56,7 +56,13 @@ export const Login = () => {
           <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
         </FormControl>
 
-        <Button type="submit" size="md" w="100%" colorScheme="blue">
+        <Button
+          type="submit"
+          size="md"
+          w="100%"
+          colorScheme="blue"
+          isLoading={isSubmitting}
+        >
           Iniciar sesión
         </Button>
       </VStack>
