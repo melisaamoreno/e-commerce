@@ -1,12 +1,7 @@
 import {
   Heading,
   Input,
-  Text,
-  Slider,
-  SliderTrack,
   Box,
-  SliderThumb,
-  SliderFilledTrack,
   VStack,
   Image,
   Button,
@@ -16,23 +11,15 @@ import {
 } from '@chakra-ui/react'
 
 import { useFetch } from '../../Hooks/useFetch'
+import { NavLink } from 'react-router-dom'
 
 export const Products = () => {
   const { data, error, page, setPage } = useFetch()
 
   return (
     <>
-      <VStack m="20px">
-        <Heading color="black">Productos</Heading>
-        <Input w="300px" placeholder="Buscar"></Input>
-        <Text color="black">Filtrar por precio</Text>
-        <Slider defaultValue={10} min={0} max={300} step={30} w="400px">
-          <SliderTrack bg="red.900">
-            <Box position="relative" right={10} />
-            <SliderFilledTrack bg="tomato" />
-          </SliderTrack>
-          <SliderThumb boxSize={6} />
-        </Slider>
+      <VStack>
+        <Input w="300px" placeholder="Buscar" mt="15px"></Input>
       </VStack>
 
       <VStack>
@@ -63,7 +50,9 @@ export const Products = () => {
                     {product.attributes.title}
                   </Heading>
 
-                  <Button margin="15px">Ver detalles</Button>
+                  <Button margin="15px">
+                    <NavLink to={`${product.id}`}>Ver detalles</NavLink>
+                  </Button>
                 </Box>
 
                 <Image
@@ -76,26 +65,15 @@ export const Products = () => {
         )}
         {error && <Alert>Ha ocurrido un error</Alert>}
       </VStack>
-      <Container display="flex" justifyContent="center" padding="20px">
-        Prev{' '}
-        <Button
-          mr="20px"
-          ml="15px"
-          bg="white"
-          onClick={() => setPage(page - 1)}
-        >
-          {'<'}
+
+      <Box display="flex" justifyContent="center" padding="20px">
+        <Button mr="20px" ml="15px" onClick={() => setPage(page - 1)}>
+          Prev
         </Button>
-        <Button
-          mr="20px"
-          ml="15px"
-          bg="white"
-          onClick={() => setPage(page + 1)}
-        >
-          {' >'}
+        <Button mr="20px" ml="15px" onClick={() => setPage(page + 1)}>
+          Next
         </Button>
-        Next
-      </Container>
+      </Box>
     </>
   )
 }

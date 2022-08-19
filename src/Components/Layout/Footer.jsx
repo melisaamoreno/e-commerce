@@ -8,13 +8,7 @@ import {
 
 export const Footer = () => {
   return (
-    <HStack
-      justifyContent="space-between"
-      color="white"
-      bg="black"
-      p="30px"
-      borderTop="1px solid white"
-    >
+    <HStack justifyContent="space-between" color="white" bg="#001219" p="30px">
       <Text>Hecho por Melisa Moreno - 2022</Text>
 
       <HStack>

@@ -9,7 +9,7 @@ export const useFetch = (params) => {
 
   useEffect(() => {
     fetch(
-      'https://strapiecommerce-production-4333.up.railway.app/api/products?populate=categories&populate=image'
+      'http://localhost:1337/api/products?pagination[limit]=9&populate=image'
     )
       .then((res) => res.json())
       .then((info) => {

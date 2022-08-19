@@ -7,19 +7,12 @@ import {
   VStack,
   Button,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
-import Carousel from '../../Components/Carousel/Carousel'
+import { NavLink } from 'react-router-dom'
+
+import { useFetch } from '../../Hooks/useFetch'
 
 export const Home = () => {
-  const [data, setData] = useState([])
-
-  useEffect(() => {
-    fetch(
-      'https://strapiecommerce-production-4333.up.railway.app/api/products?populate=categories&populate=image'
-    )
-      .then((res) => res.json())
-      .then((info) => setData(info))
-  }, [])
+  const { data } = useFetch()
 
   return (
     <>
@@ -52,7 +45,9 @@ export const Home = () => {
                     {product.attributes.title}
                   </Heading>
 
-                  <Button margin="15px">Ver detalles</Button>
+                  <Button margin="15px">
+                    <NavLink to={`/${product.id}`}>Ver detalles</NavLink>
+                  </Button>
                 </Box>
 
                 <Image
