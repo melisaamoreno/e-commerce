@@ -67,10 +67,10 @@ export const Products = () => {
       </VStack>
 
       <Box display="flex" justifyContent="center" padding="20px">
-        <Button mr="20px" ml="15px" onClick={() => console.log('click')}>
+        <Button mr="20px" ml="15px" onClick={() => setPage(page - 1)}>
           Prev
         </Button>
-        <Button mr="20px" ml="15px" onClick={() => console.log('click')}>
+        <Button mr="20px" ml="15px" onClick={() => setPage(page + 1)}>
           Next
         </Button>
       </Box>

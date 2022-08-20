@@ -20,7 +20,7 @@ export const useFetch = (params) => {
       .catch((err) => {
         setError(err)
       })
-  }, [params])
+  }, [params, page])
 
   return { data, error, id, page, setPage }
 }
