@@ -29,14 +29,11 @@ export const Login = () => {
   })
 
   const onSubmit = async ({ email, password }) => {
-    const response = await fetch(
-      'https://strapiecommerce-production-4333.up.railway.app/api/auth/local',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: email, password }),
-      }
-    )
+    const response = await fetch('http://localhost:1337/api/auth/local', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ identifier: email, password }),
+    })
     const user = await response.json()
     console.log(user)
   }

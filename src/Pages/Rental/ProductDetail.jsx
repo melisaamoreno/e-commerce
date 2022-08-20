@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
+import { BsCart4 } from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import {
-  HStack,
-  Container,
-  Box,
   Image,
   Heading,
   Text,
   Button,
+  HStack,
+  Container,
 } from '@chakra-ui/react'
 
 export const ProductDetail = (params) => {
@@ -15,7 +15,7 @@ export const ProductDetail = (params) => {
   const { id } = useParams()
 
   useEffect(() => {
-    fetch(`http://localhost:1337/api/products?populate=image&filters[id]=${id}`)
+    fetch(`http://localhost:1337/api/products/${id}?populate=image`)
       .then((res) => res.json())
       .then(setDetail)
   }, [params])
@@ -25,27 +25,33 @@ export const ProductDetail = (params) => {
   }
 
   return (
-    <HStack>
-      <Container
-        mt="50px"
-        borderRadius="10px"
-        color="black"
-        padding="2%"
-        display="flex"
-        key={details.id}
-      >
-        <Box>
-          <Image borderRadius="10px" mr="10px" w="500px" />
-        </Box>
-        <Container>
-          <Box>
-            <Heading fontSize="25px" padding="5px">
-              {details.id}
-            </Heading>
-            <Text>{details.description}</Text>
-          </Box>
-          <Button>Soy un boton</Button>
-        </Container>
+    <HStack
+      w="100%"
+      borderRadius="10px"
+      color="black"
+      padding="10%"
+      display="flex"
+    >
+      <Container>
+        <Image
+          borderRadius="10px"
+          mr="10px"
+          w="350px"
+          src={details.data.attributes.image.data.attributes.url}
+        />
+      </Container>
+
+      <Container>
+        <Heading fontSize="25px">{details.data.attributes.title}</Heading>
+        <Text mt="10px">{details.data.attributes.description}</Text>
+        <Text fontWeight="bold" mt="5px">
+          Precio por día:
+        </Text>
+        <Text>${details.data.attributes.price}</Text>
+
+        <Button bg="red.300" mt="10px" size="lg">
+          <BsCart4 />
+        </Button>
       </Container>
     </HStack>
   )

@@ -5,11 +5,11 @@ export const useFetch = (params) => {
   const { id } = useParams()
   const [data, setData] = useState({})
   const [error, setError] = useState()
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(0)
 
   useEffect(() => {
     fetch(
-      'http://localhost:1337/api/products?pagination[limit]=9&populate=image'
+      `http://localhost:1337/api/products?pagination[start]=${page}&pagination[limit]=9&populate=image`
     )
       .then((res) => res.json())
       .then((info) => {
