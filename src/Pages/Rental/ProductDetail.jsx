@@ -10,9 +10,14 @@ import {
   Container,
 } from '@chakra-ui/react'
 
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../redux/slices/cartSlice'
+
 export const ProductDetail = (params) => {
   const [details, setDetail] = useState(null)
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const [addProducts, setAddProducts] = useState(null)
 
   useEffect(() => {
     fetch(`http://localhost:1337/api/products/${id}?populate=image`)
@@ -22,6 +27,10 @@ export const ProductDetail = (params) => {
 
   if (!details) {
     return null
+  }
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(details))
   }
 
   return (
@@ -49,7 +58,12 @@ export const ProductDetail = (params) => {
         </Text>
         <Text>${details.data.attributes.price}</Text>
 
-        <Button bg="red.300" mt="10px" size="lg">
+        <Button
+          bg="red.300"
+          mt="10px"
+          size="lg"
+          onClick={() => handleAddToCart(details)}
+        >
           <BsCart4 />
         </Button>
       </Container>

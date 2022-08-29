@@ -9,6 +9,8 @@ import {
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { object, string } from 'yup'
+import { useDispatch } from 'react-redux'
+import { login } from '../../redux/slices/authSlice'
 
 const schema = object({
   email: string()
@@ -28,6 +30,7 @@ export const Login = () => {
     resolver: yupResolver(schema),
   })
 
+  const dispatch = useDispatch()
   const onSubmit = async ({ email, password }) => {
     const response = await fetch('http://localhost:1337/api/auth/local', {
       method: 'POST',
@@ -35,7 +38,7 @@ export const Login = () => {
       body: JSON.stringify({ identifier: email, password }),
     })
     const user = await response.json()
-    console.log(user)
+    dispatch(login(user))
   }
 
   return (

@@ -68,10 +68,10 @@ export const Products = () => {
 
       <Box display="flex" justifyContent="center" padding="20px">
         <Button mr="20px" ml="15px" onClick={() => setPage(page - 1)}>
-          Prev
+          Anterior
         </Button>
         <Button mr="20px" ml="15px" onClick={() => setPage(page + 1)}>
-          Next
+          Siguiente
         </Button>
       </Box>
     </>

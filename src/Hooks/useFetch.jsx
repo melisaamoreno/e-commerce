@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 
-export const useFetch = (params) => {
-  const { id } = useParams()
+export const useFetch = () => {
   const [data, setData] = useState({})
   const [error, setError] = useState()
   const [page, setPage] = useState(0)
@@ -20,7 +18,7 @@ export const useFetch = (params) => {
       .catch((err) => {
         setError(err)
       })
-  }, [params, page])
+  }, [page])
 
-  return { data, error, id, page, setPage }
+  return { data, error, page, setPage }
 }
