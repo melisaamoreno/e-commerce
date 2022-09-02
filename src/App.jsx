@@ -4,6 +4,7 @@ import { Home } from './Pages/Home/Home'
 import { Products } from './Pages/Rental/Products'
 import { Error } from './Pages/404/Error'
 import { ProductDetail } from './Pages/Rental/ProductDetail'
+import { Checkout } from './Pages/Checkout/Checkout'
 import './layout.css'
 import { ProtectedRoutes } from './Components/Auth/ProtectedRoutes'
 
@@ -15,6 +16,7 @@ function App() {
         <Route element={<ProtectedRoutes />}>
           <Route path="productos" element={<Products />} />
           <Route path="productos/:id" element={<ProductDetail />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

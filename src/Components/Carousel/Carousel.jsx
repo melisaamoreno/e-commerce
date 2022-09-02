@@ -1,9 +1,15 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Slider from 'react-slick'
 
-export default function Carousel() {
+export const Carousel = () => {
+  useEffect(() => {
+    fetch('http://localhost:1337/api/carousels?populate=image')
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }, [])
+
   const settings = {
     dots: true,
     infinite: true,

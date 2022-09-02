@@ -3,26 +3,45 @@ import {
   Input,
   Box,
   VStack,
+  HStack,
   Image,
   Button,
   Container,
   Grid,
   Alert,
+  Center,
 } from '@chakra-ui/react'
 
 import { useFetch } from '../../Hooks/useFetch'
 import { NavLink } from 'react-router-dom'
+import { BiSearchAlt2 } from 'react-icons/bi'
 
 export const Products = () => {
-  const { data, error, page, setPage } = useFetch()
+  const {
+    data,
+    error,
+    page,
+    setPage,
+    setFilterProducts,
+    //setFilterPrice,
+  } = useFetch()
 
   return (
     <>
       <VStack>
-        <Input w="300px" placeholder="Buscar" mt="15px"></Input>
-      </VStack>
+        <HStack>
+          <Center>
+            <BiSearchAlt2 size="30px" />
+            <Input
+              w="600px"
+              ml="10px"
+              placeholder="Buscar producto"
+              mt="10px"
+              onChange={(e) => setFilterProducts(e.target.value)}
+            ></Input>
+          </Center>
+        </HStack>
 
-      <VStack>
         {data.data && (
           <Grid templateColumns="repeat(3, 1fr)" gap={4} p="10px">
             {data.data.map((product) => (

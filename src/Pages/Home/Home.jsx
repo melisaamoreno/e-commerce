@@ -8,6 +8,9 @@ import {
   Button,
 } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
+import { Carousel } from '../../Components/Carousel/Carousel'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 import { useFetch } from '../../Hooks/useFetch'
 
@@ -16,7 +19,7 @@ export const Home = () => {
 
   return (
     <>
-      {/*<Carousel></Carousel>*/}
+      <Carousel />
       <VStack>
         {data.data && (
           <Grid templateColumns="repeat(3, 1fr)" gap={4} p="10px">
@@ -46,7 +49,9 @@ export const Home = () => {
                   </Heading>
 
                   <Button margin="15px">
-                    <NavLink to={`/${product.id}`}>Ver detalles</NavLink>
+                    <NavLink to={`productos/${product.id}`}>
+                      Ver detalles
+                    </NavLink>
                   </Button>
                 </Box>
 

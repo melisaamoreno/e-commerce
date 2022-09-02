@@ -17,7 +17,6 @@ export const ProductDetail = (params) => {
   const [details, setDetail] = useState(null)
   const { id } = useParams()
   const dispatch = useDispatch()
-  const [addProducts, setAddProducts] = useState(null)
 
   useEffect(() => {
     fetch(`http://localhost:1337/api/products/${id}?populate=image`)
@@ -30,7 +29,7 @@ export const ProductDetail = (params) => {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToCart(details))
+    dispatch(addToCart(details?.data))
   }
 
   return (
