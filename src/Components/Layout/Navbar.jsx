@@ -24,9 +24,6 @@ export const Navbar = () => {
         <NavLink to="productos">Rental</NavLink>
         <Text>|</Text>
 
-        <Cart />
-        <ModalAuth />
-
         <Icon color="white" onClick={toggleColorMode}>
           {colorMode === 'light' ? (
             <BiMoon size="25px" />
@@ -34,6 +31,9 @@ export const Navbar = () => {
             <BsSunFill size="25px" />
           )}
         </Icon>
+
+        <Cart />
+        <ModalAuth />
       </HStack>
     </HStack>
   )

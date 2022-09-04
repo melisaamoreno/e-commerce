@@ -5,6 +5,7 @@ import {
   VStack,
   Input,
   Button,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -22,6 +23,8 @@ const schema = object({
 })
 
 export const Login = () => {
+  const toast = useToast()
+
   const {
     register,
     handleSubmit,
@@ -39,6 +42,14 @@ export const Login = () => {
     })
     const user = await response.json()
     dispatch(login(user))
+
+    toast({
+      title: `Bienvenid@ ${user.user.username} `,
+      description: 'Que bueno verte de nuevo ;)',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   return (

@@ -9,8 +9,6 @@ import {
 } from '@chakra-ui/react'
 import { NavLink } from 'react-router-dom'
 import { Carousel } from '../../Components/Carousel/Carousel'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
 
 import { useFetch } from '../../Hooks/useFetch'
 

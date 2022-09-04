@@ -5,6 +5,7 @@ import {
   VStack,
   Input,
   Button,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -23,6 +24,7 @@ const schema = object({
 })
 
 export const Register = () => {
+  const toast = useToast()
   const {
     register,
     handleSubmit,
@@ -73,6 +75,15 @@ export const Register = () => {
           w="100%"
           colorScheme="blue"
           isLoading={isSubmitting}
+          onClick={() =>
+            toast({
+              title: 'Cuenta creada',
+              description: 'Ahora podés ver todos nuestros productos',
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            })
+          }
         >
           Registrarse
         </Button>

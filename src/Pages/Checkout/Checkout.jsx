@@ -1,10 +1,5 @@
-import {
-  addToCart,
-  addItem,
-  quitItem,
-  removeProduct,
-} from '../../redux/slices/cartSlice'
-import { useParams } from 'react-router-dom'
+import { addItem, quitItem, removeProduct } from '../../redux/slices/cartSlice'
+
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Box,
@@ -14,36 +9,30 @@ import {
   Button,
   Grid,
   GridItem,
+  useToast,
 } from '@chakra-ui/react'
 import { BsTrash } from 'react-icons/bs'
 
 export const Checkout = () => {
-  const { id } = useParams()
+  const toast = useToast()
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state) => state.cart)
-  console.log(cartItems)
 
-  const sumPrices = () => {
-    let sumaDeProducts = 0
-
-    cartItems.forEach((prod) => {
-      sumaDeProducts = prod.attributes.price * prod.cartQuantity
+  const orders = async () => {
+    const response = await fetch('http://localhost:1337/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: { Item: cartItems } }),
     })
-
-    return { sumaDeProducts }
-  }
-
-  const checkout = async ({ email, password }) => {
-    const response = await fetch(
-      `http://localhost:1337/api/users/${id}?populate[0]=orders`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ identifier: email, password }),
-      }
-    )
-    const user = await response.json()
-    dispatch(addToCart(user))
+    const order = await response.json()
+    console.log(order)
+    toast({
+      title: 'Reserva realizada con exito',
+      description: 'Gracias por elegirnos',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   return (
@@ -62,7 +51,6 @@ export const Checkout = () => {
           <GridItem>
             <Text mt="10px">{item.attributes.title} </Text>
           </GridItem>
-
           <GridItem display="flex">
             <GridItem fontSize="12px" mt="10px" mr="10px">
               Cant. de días
@@ -111,10 +99,23 @@ export const Checkout = () => {
               />
             </Button>
           </GridItem>
-
-          <GridItem>${sumPrices().sumaDeProducts}</GridItem>
+          <GridItem></GridItem>
         </Grid>
       ))}
+      <Box
+        display="flex"
+        justifyContent="end"
+        mr="150px"
+        mt="20px"
+        mb="20px"
+        w="90%"
+        p="10px"
+      >
+        {' '}
+        <Button size="lg" colorScheme="blue" onClick={orders}>
+          Reservar
+        </Button>
+      </Box>
     </>
   )
 }

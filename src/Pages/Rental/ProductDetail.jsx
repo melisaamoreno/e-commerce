@@ -8,12 +8,14 @@ import {
   Button,
   HStack,
   Container,
+  useToast,
 } from '@chakra-ui/react'
 
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../redux/slices/cartSlice'
 
 export const ProductDetail = (params) => {
+  const toast = useToast()
   const [details, setDetail] = useState(null)
   const { id } = useParams()
   const dispatch = useDispatch()
@@ -30,6 +32,12 @@ export const ProductDetail = (params) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart(details?.data))
+    toast({
+      title: 'Producto agregado',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
   }
 
   return (
@@ -57,14 +65,16 @@ export const ProductDetail = (params) => {
         </Text>
         <Text>${details.data.attributes.price}</Text>
 
-        <Button
-          bg="red.300"
-          mt="10px"
-          size="lg"
-          onClick={() => handleAddToCart(details)}
-        >
-          <BsCart4 />
-        </Button>
+        {
+          <Button
+            bg="red.300"
+            mt="10px"
+            size="lg"
+            onClick={() => handleAddToCart(details)}
+          >
+            <BsCart4 size="25px" />
+          </Button>
+        }
       </Container>
     </HStack>
   )

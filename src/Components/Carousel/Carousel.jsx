@@ -1,13 +1,15 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from 'react-slick'
+import { Box, Image } from '@chakra-ui/react'
 
 export const Carousel = () => {
+  const [image, setImage] = useState([])
   useEffect(() => {
     fetch('http://localhost:1337/api/carousels?populate=image')
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => setImage(data))
   }, [])
 
   const settings = {
@@ -18,25 +20,21 @@ export const Carousel = () => {
     slidesToScroll: 1,
   }
   return (
-    <Slider {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
-    </Slider>
+    <Box p="20px" w="100%">
+      {image.data && (
+        <Slider {...settings}>
+          {image.data.map((img) => (
+            <Box key={img.id}>
+              <Image
+                w="100%"
+                display="flex"
+                h="fit-content"
+                src={img.attributes.image.data.attributes.formats.large.url}
+              />
+            </Box>
+          ))}
+        </Slider>
+      )}
+    </Box>
   )
 }
