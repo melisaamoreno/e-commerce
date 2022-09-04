@@ -80,7 +80,7 @@ export const Register = () => {
               title: 'Cuenta creada',
               description: 'Ahora podés ver todos nuestros productos',
               status: 'success',
-              duration: 9000,
+              duration: 6000,
               isClosable: true,
             })
           }

@@ -47,7 +47,7 @@ export const Login = () => {
       title: `Bienvenid@ ${user.user.username} `,
       description: 'Que bueno verte de nuevo ;)',
       status: 'success',
-      duration: 9000,
+      duration: 6000,
       isClosable: true,
     })
   }
